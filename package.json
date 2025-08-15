@@ -1,14 +1,14 @@
 {
-  "name": "my-electron-app",
+  "name": "somett",
   "version": "1.0.0",
-  "description": "Hello,World!!!",
+  "description": "some dev tools for daily code work",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "author": "lcs",
+  "author": "quixote-liu",
   "license": "MIT",
   "devDependencies": {
     "@electron-forge/cli": "^7.8.1",
@@ -19,9 +19,13 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron/fuses": "^1.8.0",
-    "electron": "^37.2.4"
+    "electron": "^37.2.4",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   }
 }
