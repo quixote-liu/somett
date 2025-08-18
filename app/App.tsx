@@ -15,36 +15,16 @@ const App: React.FC = () => {
 
   // 检查是否在Electron环境中并获取应用信息
   useEffect(() => {
-    // 检查是否是Electron环境
-    const checkElectron = () => {
-      // 渲染进程中检测Electron
-    //   if (window && window.process && window.process.) {
-    //     return true;
-    //   }
-      // 主进程中检测Electron
-      if (typeof process !== 'undefined' && process.versions && process.versions.electron) {
-        return true;
-      }
-      return false;
+    const electron = window.require('electron');
+    const app = electron.remote.app;
+    if (app) {
+      setAppInfo({
+        name: app.getName(),
+        version: app.getVersion(),
+        path: app.getPath('userData')
+      });
+      setIsElectron(true);
     };
-
-    setIsElectron(checkElectron());
-
-    // 获取Electron应用信息
-    if (checkElectron() && window.require) {
-      try {
-        const electron = window.require('electron');
-        const app = electron.remote.app;
-        
-        setAppInfo({
-          name: app.getName(),
-          version: app.getVersion(),
-          path: app.getPath('userData')
-        });
-      } catch (error) {
-        console.error('获取Electron应用信息失败:', error);
-      }
-    }
   }, []);
 
   return (

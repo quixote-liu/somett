@@ -1,0 +1,51 @@
+const path = require('path');
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.tsx'),
+
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'client.js',
+    },
+
+    mode: 'production',
+
+    resolve: {
+        extensions: ['.js', '.tsx', '.ts'],
+    },
+
+    module: {
+        rules: [
+            // ts|tsx文件处理
+            {
+                test: /\.ts|tsx$/,
+                include: path.resolve(__dirname, 'src'),
+                loader: 'esbuild-loader',
+                options: {
+                    loader: 'tsx',
+                    target: 'es2015',
+                }
+            },
+            // css处理
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
+            },
+            /*
+              图片文件处理,大于100kb的文件不会转成base64,会通过http直接访问,
+              base64会减少请求次数,过大的文件转成base64会让js加载变慢
+             */
+              {
+                test: /\.(png|svg|gif|jpg)/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100 * 1024,
+                        esModule: false,
+                        name: './resources/images/[name]_[hash:8].[ext]',
+                    },
+                }],
+            },
+        ],
+    }
+}

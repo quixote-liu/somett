@@ -1,27 +1,26 @@
-const { app, BrowserWindow} = require("electron")
+const { app, BrowserWindow } = require('electron/main')
 
 const createWindow = () => {
-    const win = new BrowserWindow({
-        width: 1200,
-        height: 800,
-        title: "SomeTT"
-    })
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600
+  })
 
-    const startUrl = process.env.ELECTRON_START_URL || url.format({
-        pathname: path.join(__dirname, '/index.html'),
-        protocol: 'file:',
-        slashes: true
-      });
-
-    win.loadFile(startUrl)
+  win.loadFile('index.html')
 }
 
-app.whenReady().then(()=>{
-    createWindow()
+app.whenReady().then(() => {
+  createWindow()
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow()
+    }
+  })
 })
 
-app.on("window-all-closed", () => {
-    if (process.platform != "darwin") {
-        app.quit()
-    }
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
