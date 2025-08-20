@@ -1,3 +1,6 @@
 node_modules
 backend/Cargo.lock
 backend/target/
+
+out/
+extra/

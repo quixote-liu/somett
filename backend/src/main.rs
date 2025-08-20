@@ -19,7 +19,7 @@ async fn manual_hello() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(Files::new("/dist", "./dist"))
+            .service(Files::new("/dist", "./resources/extra/dist"))
             .service(hello)
             .service(echo)
             .route("/hey", web::get().to(manual_hello))
